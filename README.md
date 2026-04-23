@@ -24,13 +24,18 @@ pip install -r requirements.txt
 ### 4. Download the model
 python download_script\download.py
 
-### 5. Create .env file
-Copy .env.example to .env and fill in values:
-MODEL_PATH=./models/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf
+### 5. Create your .env file for environment variables
+echo. > .env (make sure you're in CHAT-BOT/)
+
+Open .env and add your config:
+envMODEL_PATH=./models/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf
 N_CTX=4096
 N_GPU_LAYERS=0
 TEMPERATURE=0.7
 MAX_TOKENS=512
+HOST=127.0.0.1
+PORT=8000
+
 
 ### 6. Run the app
 uvicorn main:app --reload
