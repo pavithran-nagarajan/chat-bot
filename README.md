@@ -68,7 +68,7 @@ NEW-ITEM .env
 Open `.env` and add the following config:
 
 ```env
-MODEL_PATH=./models/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf
+MODEL_PATH=./models/llama-3.1-8B/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf
 N_CTX=4096
 N_GPU_LAYERS=0
 TEMPERATURE=0.7
