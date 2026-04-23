@@ -17,7 +17,7 @@ A local AI chatbot built with FastAPI and Llama 3.1 8B model.
 ### 1. Clone the repository
 
 ```bash
-git clone your-repo-url
+git clone chat-bot
 cd chat-bot
 ```
 
