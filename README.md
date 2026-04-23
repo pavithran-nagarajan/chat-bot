@@ -62,7 +62,7 @@ python download_script\download.py
 Make sure you are inside the `CHAT-BOT/` folder, then run:
 
 ```bash
-echo. > .env
+NEW-ITEM .env
 ```
 
 Open `.env` and add the following config:
