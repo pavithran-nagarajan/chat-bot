@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from app.api.api_business.model_business import llm
+from app.business.model_business.model_business import llm
 from app.api.api_business.rag_business import search_documents
 
 load_dotenv()
