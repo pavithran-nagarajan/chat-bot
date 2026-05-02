@@ -15,9 +15,5 @@ async def upload_document(file: UploadFile = File(...)):
 
 @router.post("/upload-text")
 async def upload_text(text: str):
-    logger.debug("DEBUG")
-    logger.error("ERROR")
-    logger.error("CRITICAL")
-
     add_documents([text])
     return {"message": "Text added successfully!"}
