@@ -1,12 +1,9 @@
 from fastapi import APIRouter, UploadFile, File
-from fastapi.responses import JSONResponse
 from app.api.api_business.rag_business import add_documents
 from app.business.common_business.document_loader_business import extract_text
-from app.business.common_business.logging_business import get_logger
-from app.business.common_business.logging_business import logging
+from app.business.common_business.exception_handler_business import handle_exception
 
 router = APIRouter()
-logger = get_logger(__name__)
 
 @router.post("/upload")
 async def upload_document(file: UploadFile = File(...)):
@@ -19,12 +16,7 @@ async def upload_document(file: UploadFile = File(...)):
         job_api_response["Message"] = f"{file.filename} uploaded successfully!";
         return job_api_response
     except Exception as e:
-        logging.critical(
-            f"Unhandled exception | {str(e)}",
-            exc_info=e
-        )
-        job_api_response["Message"] = "Internal server error"
-        return JSONResponse(status_code=500, content=job_api_response)
+        handle_exception(e, context="extract_text")
 
 @router.post("/upload-text")
 async def upload_text(text: str):
@@ -35,9 +27,4 @@ async def upload_text(text: str):
         job_api_response["Message"] = "Text added successfully!";
         return job_api_response
     except Exception as e:
-        logging.critical(
-            f"Unhandled exception | {str(e)}",
-            exc_info=e
-        )
-        job_api_response["Message"] = "Internal server error"
-        return JSONResponse(status_code=500, content=job_api_response)
+        handle_exception(e, context="extract_text")

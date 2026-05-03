@@ -1,8 +1,7 @@
 from fastapi import APIRouter
-from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from app.api.api_business.chat_business import generate_reply
-from app.business.common_business.logging_business import logging
+from app.business.common_business.exception_handler_business import handle_exception
 
 router = APIRouter()
 sessions = {}
@@ -25,9 +24,4 @@ def chat_endpoint(req: ChatRequest):
         job_api_response["reply"] = reply;
         return job_api_response
     except Exception as e:
-        logging.critical(
-            f"Unhandled exception | session={req.session_id} | {str(e)}",
-            exc_info=e
-        )
-        job_api_response["Message"] = "Internal server error"
-        return JSONResponse(status_code=500, content=job_api_response)
+        handle_exception(e, context="extract_text")
