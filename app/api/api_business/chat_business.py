@@ -1,9 +1,5 @@
-import os
-from dotenv import load_dotenv
-from app.business.model_business.model_business import llm
 from app.api.api_business.rag_business import search_documents
-
-load_dotenv()
+from app.business.model_business.llama_business import get_reply_from_llm
 
 def generate_reply(messages: list[dict]) -> str:
     # Get last user message
@@ -20,9 +16,5 @@ def generate_reply(messages: list[dict]) -> str:
         }
     ] + messages[1:]  # skip original system message
     
-    response = llm.create_chat_completion(
-        messages=messages_with_context,
-        max_tokens=int(os.getenv("MAX_TOKENS", 512)),
-        temperature=float(os.getenv("TEMPERATURE", 0.7)),
-    )
-    return response["choices"][0]["message"]["content"]
+    response = get_reply_from_llm(messages_with_context)
+    return response
